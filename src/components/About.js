@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <div>
+    <div className="container">
       <h1>About GalacticSips</h1>
       <p>
         Welcome to GalacticSips, where we embark on a cosmic journey to bring
