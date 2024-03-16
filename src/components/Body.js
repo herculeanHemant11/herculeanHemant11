@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 // import resList from "../utils/mockData";
 
 const Body = () => {
@@ -31,6 +33,8 @@ const Body = () => {
     );
   };
 
+  const onlineStatus = useOnlineStatus();
+  if (!onlineStatus) return <h1>You're Offline</h1>;
   //Conditional Rendering
 
   return restaurantList.length === 0 ? (
@@ -86,7 +90,13 @@ const Body = () => {
         <div className="row">
           {/* Map through the current restaurantList to display RestaurantCard components */}
           {searchRestaurantList.map((card) => (
-            <RestaurantCard key={card.info.id} resData={card} />
+            <Link
+              to={"restaurants/" + card.info.id}
+              key={card.info.id}
+              className="res-card-wrap"
+            >
+              <RestaurantCard resData={card} />
+            </Link>
           ))}
         </div>
       </div>
