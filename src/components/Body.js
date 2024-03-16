@@ -38,7 +38,7 @@ const Body = () => {
   //Conditional Rendering
 
   return restaurantList.length === 0 ? (
-    <div className="container">
+    <div className="container m-auto">
       <div className="row">
         {/* Shimmer loading placeholders */}
         {[...Array(12)].map((_, index) => (
@@ -48,19 +48,19 @@ const Body = () => {
     </div>
   ) : (
     <div className="body-container">
-      <div className="container">
-        <div className="filter">
-          <div className="search">
+      <div className="container m-auto">
+        <div className="filter flex items-center">
+          <div className="search py-4">
             <input
               type="text"
-              className="search-box"
+              className="search-box border border-solid border-black-400 p-[7px]"
               value={searchText}
               onChange={(event) => {
                 setSearchText(event.target.value);
               }}
             />
             <button
-              className="search-btn"
+              className="search-btn bg-green-100 px-4 py-2 ml-4"
               onClick={() => {
                 const searcedRestaurant = restaurantList.filter((res) =>
                   res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -73,7 +73,7 @@ const Body = () => {
           </div>
           {/* Button to filter and show only top-rated restaurants */}
           <button
-            className="filter-btn"
+            className="filter-btn bg-green-400 px-4 py-2 ml-8"
             onClick={() => {
               // Use filter to get only top-rated restaurants (avgRating > 4.3)
               const topRated = restaurantList.filter(
@@ -87,13 +87,13 @@ const Body = () => {
             Top Rated Restaurants
           </button>
         </div>
-        <div className="row">
+        <div className="flex flex-wrap -m-4">
           {/* Map through the current restaurantList to display RestaurantCard components */}
           {searchRestaurantList.map((card) => (
             <Link
               to={"restaurants/" + card.info.id}
               key={card.info.id}
-              className="res-card-wrap"
+              className="w-full sm:w-1/2 lg:w-1/4 my-4"
             >
               <RestaurantCard resData={card} />
             </Link>

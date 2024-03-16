@@ -12,15 +12,18 @@ const RestaurantCard = (props) => {
   const { name, cloudinaryImageId, cuisines, avgRating, sla } = resData?.info;
   const { deliveryTime } = sla;
   return (
-    <div className="res-card" style={cardBg}>
+    <div
+      className="rounded-lg res-card p-4 m-4 h-full hover:drop-shadow-xl ease-in-out duration-200"
+      style={cardBg}
+    >
       <div
-        className="res-card-img"
+        className="res-card-img pb-[56.25%] bg-cover bg-center mb-4"
         style={{
           backgroundImage: `url(
               "${CDN_URL + cloudinaryImageId}")`,
         }}
       ></div>
-      <h4>{name}</h4>
+      <h4 className="font-bold text-lg mb-2">{name}</h4>
       <h5>{cuisines.join(", ")}</h5>
       <h6>{avgRating} stars</h6>
       <h6>{deliveryTime} Minutes</h6>
