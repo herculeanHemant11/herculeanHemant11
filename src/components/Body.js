@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { vegRestaurant } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -12,6 +12,8 @@ const Body = () => {
 
   const [searchRestaurantList, setSearchRestaurantList] = useState([]);
 
+  const VegRestaurantCard = vegRestaurant(RestaurantCard);
+
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
@@ -23,6 +25,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5535&lng=77.2588&page_type=DESKTOP_WEB_LISTING"
     );
     const jsonData = await data.json();
+    console.log(jsonData);
     setRestaurantList(
       jsonData?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
@@ -48,7 +51,7 @@ const Body = () => {
     </div>
   ) : (
     <div className="body-container">
-      <div className="container m-auto">
+      <div className="container m-auto px-4">
         <div className="filter flex items-center">
           <div className="search py-4">
             <input
@@ -95,7 +98,11 @@ const Body = () => {
               key={card.info.id}
               className="w-full sm:w-1/2 lg:w-1/4 my-4"
             >
-              <RestaurantCard resData={card} />
+              {card.info.veg ? (
+                <VegRestaurantCard resData={card} />
+              ) : (
+                <RestaurantCard resData={card} />
+              )}
             </Link>
           ))}
         </div>
