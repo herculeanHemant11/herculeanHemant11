@@ -34,7 +34,7 @@ const RestaurantCard = (props) => {
 export const vegRestaurant = (RestaurantCard) => {
   return (props) => {
     return (
-      <div>
+      <div className="h-full">
         <label className="absolute bg-black text-white ml-4 p-2 rounded-lg z-10">
           Veg
         </label>
